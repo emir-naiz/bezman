@@ -28,3 +28,19 @@ class Product(models.Model):
     size = models.CharField(max_length=20, choices=sizes)
     image = models.ImageField(blank=True, default='default.jpeg')  # blank=True означает изображение не обязательно
 
+    def __str__(self):
+        return self.name + ' ' + self.product_model
+
+
+class Order(models.Model):
+    statuses = (
+        ('Not delivered', 'Not delivered'),
+        ('In process', 'In process'),
+        ('Delivered', 'Delivered')
+    )
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=statuses, default='New order')
+
+    def __str__(self):
+        return self.product.name + ' ' + self.status
