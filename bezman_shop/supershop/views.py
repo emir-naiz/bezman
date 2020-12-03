@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 # Create your views here.
 
+
 def productList(request):
     products = Product.objects.all()
     context = {'products': products}
