@@ -1,4 +1,5 @@
 from django.db import models
+from account.models import Customer
 
 # Create your models here.
 class Product(models.Model):
@@ -31,6 +32,10 @@ class Product(models.Model):
     def __str__(self):
         return self.name + ' ' + self.product_model
 
+    class Meta:
+        verbose_name="Товар"
+        verbose_name_plural="Товары"
+
 
 class Order(models.Model):
     statuses = (
@@ -41,6 +46,11 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=statuses, default='New order')
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.product.name + ' ' + self.status
+
+    class Meta:
+        verbose_name="Заказ" # при помощи этого меняем язык
+        verbose_name_plural="Заказы" # при помощи этого меняем язык
