@@ -14,3 +14,13 @@ class Customer(models.Model):
     class Meta:
         verbose_name="Клиент"
         verbose_name_plural="Клиенты"
+
+# class Timetables(models.Model):
+#     name = models.CharField(u'time', max_length=30)
+#
+#     class Meta:
+#         verbose_name = 'Аккаунты'
+#         verbose_name_plural = 'Аккаунты'
+#
+#     def __str__(self):
+#         return self.name
