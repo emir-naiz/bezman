@@ -1,6 +1,6 @@
 from django.db import models
 from account.models import Customer
-
+import django_filters
 # Create your models here.
 class Product(models.Model):
     types = (
@@ -54,3 +54,4 @@ class Order(models.Model):
     class Meta:
         verbose_name="Заказ" # при помощи этого меняем язык
         verbose_name_plural="Заказы" # при помощи этого меняем язык
+
