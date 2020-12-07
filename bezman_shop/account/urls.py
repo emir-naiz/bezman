@@ -8,4 +8,6 @@ urlpatterns = [
     path('customers/', customerList, name='customers'),
     path('customer/<int:customer_id>/', getCustomer, name='getcustomer'),
     path('user-create/', createUser, name='user-create'),
+    path('login/', auth, name='login'),
+    path('logout/', logout_page, name='logout'),
 ]
