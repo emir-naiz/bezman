@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
@@ -48,4 +49,5 @@ def orderUpdate(request, order_id):
             return redirect('orders')
     context = {'form': form}
     return render(request, 'supershop/order-create.html', context)
+
 
