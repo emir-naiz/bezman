@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 # Create your views here.
@@ -40,4 +41,28 @@ def auth(request):
 def logout_page(request):
     logout(request)
     return redirect('login')
+
+def task1(request):
+    string = 'Sunshine'
+    list = []
+    for i in string:
+        letter = set(string)
+        if len(letter) % 2 == 0:
+            return HttpResponse ("IGNORE HIM" +' '+string)
+        else:
+            return HttpResponse("CHAT WITH HER!" +' '+string)
+
+def task2(request):
+    import random
+    n,h = 3,7
+    list1 = []
+    list2 = [4,5,14]
+    # for i in range(n):
+    #     list1.append(random.randint(1,20))
+    for height in list2:
+        if height > h:
+          list1.append(2)
+        elif height <= h:
+          list1.append(1)
+    return HttpResponse (sum(list1))
 
