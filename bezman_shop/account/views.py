@@ -1,11 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
+from .decorators import admin_only
 from .models import *
 # Create your views here.
 
-
+@admin_only
 def customerList(request):
     customers = Customer.objects.all()
     context = {'customers': customers}
@@ -22,8 +25,12 @@ def createUser(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('customers')
+            user = form.save()
+            group = Group.objects.get(name='bezgirl')
+            user.groups.add(group)
+            Customer.objects.create(user=user, phone=1, full_name=user.username)
+            user.save()
+            return redirect('/')
     context = {'form': form}
     return render(request, 'account/user-create.html', context)
 
@@ -41,28 +48,3 @@ def auth(request):
 def logout_page(request):
     logout(request)
     return redirect('login')
-
-def task1(request):
-    string = 'Sunshine'
-    list = []
-    for i in string:
-        letter = set(string)
-        if len(letter) % 2 == 0:
-            return HttpResponse ("IGNORE HIM" +' '+string)
-        else:
-            return HttpResponse("CHAT WITH HER!" +' '+string)
-
-def task2(request):
-    import random
-    n,h = 3,7
-    list1 = []
-    list2 = [4,5,14]
-    # for i in range(n):
-    #     list1.append(random.randint(1,20))
-    for height in list2:
-        if height > h:
-          list1.append(2)
-        elif height <= h:
-          list1.append(1)
-    return HttpResponse (sum(list1))
-
