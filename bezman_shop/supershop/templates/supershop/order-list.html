@@ -1,5 +1,9 @@
 {% extends 'supershop/base.html' %}
 {% block content %}
+<nav>
+    Hello, {{ request.user }}
+</nav><form action="{% url 'logout' %}"><button class=b1>Logout</button></form>
+<form action="" method="POST">
 <table>
     <tr>
         <th>Orders total</th>
