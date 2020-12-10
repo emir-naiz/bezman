@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 from django_filters.filters import OrderingFilter
 from .filters import ProductFilter
+from .decorators import allowed_roles
 # Create your views here.
 
 
@@ -14,6 +16,7 @@ def productList(request):
     context = {'products': products, 'filter':filter}
     return render(request, 'supershop/products.html', context)
 
+@allowed_roles(allowed=['bezman'])
 def orderList(request):
     orders = Order.objects.all()
     orders_count = orders.count()
