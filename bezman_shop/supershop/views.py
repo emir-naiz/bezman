@@ -30,7 +30,10 @@ def orderList(request):
 
 
 def orderCreate(request, product_id):
-    product = Product.objects.get(id=product_id)
+    try:
+        product = Product.objects.get(id=product_id)
+    except Product.DoesNotExist:
+        return HttpResponse('Page status = 404')
     customer = request.user
     form = OrderForm(initial={'product': product, 'customer': customer})
 
@@ -39,11 +42,15 @@ def orderCreate(request, product_id):
         if form.is_valid():
             form.save()
             return redirect('orders')
+
     context = {'form': form}
     return render(request, 'supershop/order-create.html', context)
 
 def orderUpdate(request, order_id):
-    order = Order.objects.get(id=order_id)
+    try:
+        order = Order.objects.get(id=order_id)
+    except Order.DoesNotExist:
+        return HttpResponse('Page status = 404')
     form = OrderForm(instance=order)
     if request.method == 'POST':
         form = OrderForm(request.POST, instance=order)
@@ -53,4 +60,18 @@ def orderUpdate(request, order_id):
     context = {'form': form}
     return render(request, 'supershop/order-create.html', context)
 
+def orderDelete(request, order_id):
+    try:
+        order = Order.objects.get(id=order_id)
+    except Order.DoesNotExist:
+        return HttpResponse('Page status = 404')
+    # form = OrderForm(instance=order)
+    if request.method == 'POST':
+        if order.status == 'Not delivered':
+            order.delete()
+            return HttpResponse('Order Deleted!')
+        else:
+            return HttpResponse('Not Valid Status for delete order!')
+    context = {'order': order}
+    return render(request, 'supershop/order-delete.html', context)
 
