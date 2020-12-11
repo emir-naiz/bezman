@@ -1,0 +1,5 @@
+<p>Are you sure you want to delete "{{ order.name }}"?</p>
+<form method="POST" action="">
+      {% csrf_token %}
+      <input type="submit" name="Submit">
+</form>
