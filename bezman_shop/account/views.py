@@ -15,7 +15,11 @@ def customerList(request):
     return render(request, 'account/customers.html', context)
 
 def getCustomer(request, customer_id):
-    customer = Customer.objects.get(id=customer_id)
+    try:
+        customer = Customer.objects.get(id=customer_id)
+    except Customer.DoesNotExist:
+        return HttpResponse('Page status = 404')
+
     orders = customer.order_set.all()
     context = {'customer': customer, 'orders': orders}
     return render(request, 'account/getcustomer.html', context)
