@@ -2,46 +2,45 @@
 {% block content %}
 <nav>
     Hello, {{ request.user }}
-</nav><form action="{% url 'logout' %}"><button class=b1>Logout</button></form>
-<form action="" method="POST">
-<table>
-    <tr>
-        <th>Orders total</th>
-        <th>Orders delivered</th>
-        <th>Orders in process</th>
-        <th>Orders not delivered</th>
-    </tr>
-    <tr>
-        <td>{{ orders_count }}</td>
-        <td>{{ orders_delivered }}</td>
-        <td>{{ orders_in_process }}</td>
-        <td>{{ orders_not_delivered }}</td>
-    </tr>
-</table>
-<table class="table table-hover table-dark">
-    <thead>
-<tr>
+    <form action="" method="POST">
+        <table>
+            <tr>
+                <th>Orders total</th>
+                <th>Orders delivered</th>
+                <th>Orders in process</th>
+                <th>Orders not delivered</th>
+            </tr>
+            <tr>
+                <td>{{ orders_count }}</td>
+                <td>{{ orders_delivered }}</td>
+                <td>{{ orders_in_process }}</td>
+                <td>{{ orders_not_delivered }}</td>
+            </tr>
+        </table>
+        <table class="table table-hover table-dark">
+            <thead>
+            <tr>
 
-    <tr>
-      <th scope="col">Image</th>
-      <th scope="col">Product</th>
-      <th scope="col">Date Created</th>
-      <th scope="col">Status</th>
-      <th scope="col">Customer</th>
-    </tr>
-    </thead>
-  <tbody>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Product</th>
+                <th scope="col">Date Created</th>
+                <th scope="col">Status</th>
+                <th scope="col">Customer</th>
+            </tr>
+            </thead>
+            <tbody>
 
-    {% for order in orders %}
-    <tr>
-       <td><img src="{{ order.product.image.url }}" width="100" height="100"></td>
-        <td>{{ order.product.name }}</td>
-        <td>{{ order.date_created }}</td>
-        <td>{{ order.status }}</td>
-        <td>{{ order.customer }}</td>
-    </tr>
-    {% endfor %}
+            {% for order in orders %}
+            <tr>
+                <td><img src="{{ order.product.image.url }}" width="100" height="100"></td>
+                <td>{{ order.product.name }}</td>
+                <td>{{ order.date_created }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ order.customer }}</td>
+            </tr>
+            {% endfor %}
 
-  </tbody>
-</table>
-{% endblock %}
+            </tbody>
+        </table>
+        {% endblock %}
