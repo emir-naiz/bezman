@@ -2,41 +2,37 @@
 {% block content %}
 <nav>
     Hello, {{ request.user }}
-</nav><form action="{% url 'logout' %}"><button class=b1>Logout</button></form>
-<form action="" method="POST">
-{{ filter.form }}
-    <input type="submit" name="Confirm">
-</form>
-<table class="table table-hover table-dark">
-    <thead>
-<tr>
-
-    <tr>
-      <th scope="col">Image</th>
-      <th scope="col">Name</th>
-      <th scope="col">Model</th>
-      <th scope="col">Manufacturer</th>
-      <th scope="col">Gender</th>
-      <th scope="col">Size</th>
-      <th scope="col">Type</th>
-      <th scope="col">Price</th>
-    </tr>
-    </thead>
-  <tbody>
-{% for product in products %}
-<tr>
-    <td><img src="{{ product.image.url }}" width="100px" height="100px"></td>
-    <td>{{ product.name }}</td>
-    <td>{{ product.product_model }}</td>
-    <td>{{ product.manufacturer }}</td>
-    <td>{{ product.gender }}</td>
-    <td>{{ product.size }}</td>
-    <td>{{ product.product_type }}</td>
-    <td>{{ product.price }}</td>
-    <td><a href="{% url 'order-create' product.id %}">Buy</a></td>
-</tr>
-
-{% endfor %}
-  </tbody>
-</table>
-{% endblock %}
+    <form action="" method="POST">
+        {{ filter.form }}
+        <input type="submit" name="Confirm">
+    </form>
+    <table class="table table-hover table-dark">
+        <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Model</th>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Size</th>
+            <th scope="col">Type</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+        <tr>
+            <td><img src="{{ product.image.url }}" width="100px" height="100px"></td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.product_model }}</td>
+            <td>{{ product.manufacturer }}</td>
+            <td>{{ product.gender }}</td>
+            <td>{{ product.size }}</td>
+            <td>{{ product.product_type }}</td>
+            <td>{{ product.price }}</td>
+            <td><a href="{% url 'order-create' product.id %}">Buy</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
