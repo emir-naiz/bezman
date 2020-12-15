@@ -15,4 +15,5 @@ urlpatterns = [
     path('user-create/', createUser, name='user-create'),
     path('login/', auth, name='login'),
     path('logout/', logout_page, name='logout'),
+    path('profile/', userProfile, name='profile'),
 ]
