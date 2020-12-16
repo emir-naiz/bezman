@@ -59,7 +59,7 @@ def userProfile(request):
     user = request.user.customer
     form = UserProfile(instance=user)
     if request.method == 'POST':
-        form = UserProfile(request.POST, instance=user)
+        form = UserProfile(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
     context = {'form':form}
